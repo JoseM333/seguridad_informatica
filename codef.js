@@ -1,33 +1,74 @@
+const clave = "MiClaveSecreta123!";
+
+function utf8ToBytes(str) {
+  return new TextEncoder().encode(str);
+}
+
+function bytesToUtf8(bytes) {
+  return new TextDecoder().decode(new Uint8Array(bytes));
+}
+
 function encriptar(texto) {
-  let out = '';
-  for (let i = 0; i < texto.length; i++) {
-    const c = texto.charCodeAt(i);
-    const s = i + 3;
-    if (c >= 32 && c <= 126) {  // caracteres imprimibles
-      const nuevo = ((c - 32 + s) % 95) + 32;
-      out += String.fromCharCode(nuevo);
-    } else {
-      out += texto[i];  // deja caracteres fuera del rango
-    }
+  const bytes = utf8ToBytes(texto);
+  const outBytes = [];
+
+  for (let i = 0; i < bytes.length; i++) {
+    const c = bytes[i];
+    const k = clave.charCodeAt(i % clave.length);
+    const s = (i + 3 + (k % 256)) % 256;
+
+    // Desplazamiento y XOR en rango 0-255
+    let nuevo = (c + s) % 256;
+    nuevo = nuevo ^ (k % 256);
+    outBytes.push(nuevo);
   }
-  return out;
+
+  // Invertir array
+  outBytes.reverse();
+
+  // Convertir bytes a cadena para base64
+  let binStr = '';
+  for (const b of outBytes) {
+    binStr += String.fromCharCode(b);
+  }
+
+  return btoa(binStr);
 }
 
 function desencriptar(texto) {
-  let out = '';
-  for (let i = 0; i < texto.length; i++) {
-    const c = texto.charCodeAt(i);
-    const s = i + 3;
-    if (c >= 32 && c <= 126) {
-      const nuevo = ((c - 32 - s + 95) % 95) + 32;
-      out += String.fromCharCode(nuevo);
-    } else {
-      out += texto[i];
-    }
+  let binStr;
+  try {
+    binStr = atob(texto);
+  } catch {
+    alert("Texto inválido para desencriptar");
+    return "";
   }
-  return out;
+
+  // Convertir cadena base64 a bytes
+  const bytes = [];
+  for (let i = 0; i < binStr.length; i++) {
+    bytes.push(binStr.charCodeAt(i));
+  }
+
+  // Invertir array
+  bytes.reverse();
+
+  const outBytes = [];
+
+  for (let i = 0; i < bytes.length; i++) {
+    const c = bytes[i];
+    const k = clave.charCodeAt(i % clave.length);
+    const s = (i + 3 + (k % 256)) % 256;
+
+    let xor = c ^ (k % 256);
+    let original = (xor - s + 256) % 256;
+    outBytes.push(original);
+  }
+
+  return bytesToUtf8(outBytes);
 }
 
+// Tu código para eventos queda igual
 
 document.getElementById('procesar-btn').addEventListener('click', () => {
   const texto = document.getElementById('texto-original').value;
