@@ -1,0 +1,84 @@
+* {
+  background: #f3f5fc;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #0a3871;
+}
+
+body {
+  padding: 20px;
+}
+
+.logo {
+  width: 60px;
+  margin: 10px;
+  vertical-align: middle;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #0a3871;
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+textarea {
+  width: 320px;
+  height: 300px;
+  border-radius: 12px;
+  border: 1px solid #0a3871;
+  padding: 15px;
+  resize: none;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #0a3871;
+}
+
+textarea::placeholder {
+  color: #0a3871;
+  opacity: 0.6;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #495057;
+}
+
+button {
+  background-color: #0a3871;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #062550;
+}
+
+.botonEncripcion,
+.botonCopy {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}

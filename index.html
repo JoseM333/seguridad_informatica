@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Encriptador César Mejorado</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <img class="logo" src="Imagenes/Logo_Alura.png" alt="Logo de Alura" />
+    <select id="accion">
+      <option value="encriptar">Encriptar</option>
+      <option value="desencriptar">Desencriptar</option>
+    </select>
+  </header>
+
+  <main>
+    <section>
+      <textarea
+        id="texto-original"
+        placeholder="Ingrese texto aquí (se permiten mayúsculas, minúsculas y símbolos)"
+      ></textarea>
+      <div class="botonEncripcion">
+        <button id="procesar-btn">Procesar</button>
+      </div>
+    </section>
+
+    <section>
+      <textarea id="texto-resultante" placeholder="Resultado" readonly></textarea>
+      <div class="botonCopy">
+        <button id="copiar-btn">Copiar resultado</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="codef.js"></script>
+</body>
+</html>
