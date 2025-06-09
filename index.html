@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Encriptador César Mejorado</title>
+  <title>Encriptador CeViXOR</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -14,11 +14,14 @@
     </select>
   </header>
 
+  <!-- Input centrado para la clave -->
+  <input type="text" id="clave" placeholder="Ingrese su clave" style="display: block; margin: 0 auto 20px auto; width: 300px;" />
+
   <main>
     <section>
       <textarea
         id="texto-original"
-        placeholder="Ingrese texto aquí (se permiten mayúsculas, minúsculas y símbolos)"
+        placeholder="Ingrese texto aqui (se permiten mayusculas, minusculas y simbolos)"
       ></textarea>
       <div class="botonEncripcion">
         <button id="procesar-btn">Procesar</button>
